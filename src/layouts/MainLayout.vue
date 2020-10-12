@@ -11,9 +11,7 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title> ALX MINI APP </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -24,14 +22,8 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item-label header class="text-grey-8"> Quick Links </q-item-label>
+        <QuickLink v-for="link in quickLinks" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 
@@ -42,60 +34,30 @@
 </template>
 
 <script>
-import EssentialLink from "components/EssentialLink.vue";
+import QuickLink from "components/QuickLink.vue";
 
 const linksData = [
   {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
+    title: "Sign In",
+    caption: "Go to the Sign In page",
+    icon: "login",
+    link: "#/",
   },
   {
-    title: "Github",
-    caption: "github.com/quasarframework",
-    icon: "code",
-    link: "https://github.com/quasarframework",
-  },
-  {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
+    title: "Sign Up",
+    caption: "Go to the Sign Up page",
+    icon: "add",
+    link: "#/register",
   },
 ];
 
 export default {
   name: "MainLayout",
-  components: { EssentialLink },
+  components: { QuickLink },
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData,
+      quickLinks: linksData,
     };
   },
 };
