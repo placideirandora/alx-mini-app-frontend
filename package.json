@@ -2,7 +2,7 @@
   "name": "alx-mini-app-frontend",
   "version": "0.0.1",
   "description": "A Front-End Web Application with Vue/Quasar for ALX Application Technical Challenge",
-  "productName": "Quasar App",
+  "productName": "ALX MINI APP",
   "author": "Placide IRANDORA",
   "private": true,
   "scripts": {
