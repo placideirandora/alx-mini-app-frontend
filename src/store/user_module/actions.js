@@ -6,26 +6,57 @@ export const signIn = ({ commit }, credentials) => {
 
     axios
       .post("/auth/signin", credentials)
-      .then(res => {
-        const {
+      .then(
+        ({
           data: {
             message,
             data: { token, user }
           }
-        } = res;
+        }) => {
+          localStorage.setItem("alxToken", token);
 
-        localStorage.setItem("alxToken", token);
+          commit("setLoading", false);
+          commit("setUser", user);
+          commit("setLoggedIn", true);
 
+          resolve(message);
+        }
+      )
+      .catch(
+        ({
+          response: {
+            data: { message }
+          }
+        }) => {
+          commit("setLoading", false);
+          reject(message);
+        }
+      );
+  });
+};
+
+export const signUp = ({ commit }, payload) => {
+  return new Promise((resolve, reject) => {
+    commit("setLoading", true);
+
+    axios
+      .post("/auth/signup", payload)
+      .then(res => {
         commit("setLoading", false);
-        commit("setUser", user);
-        commit("setLoggedIn", true);
 
-        resolve(message);
+        resolve("Registered successfully. You can now sign into your account");
       })
-      .catch(err => {
-        commit("setLoading", false);
-        reject("Incorrect Email or Password");
-      });
+      .catch(
+        ({
+          response: {
+            data: { message }
+          }
+        }) => {
+          commit("setLoading", false);
+
+          reject(message);
+        }
+      );
   });
 };
 
