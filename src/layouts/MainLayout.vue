@@ -21,9 +21,25 @@
       bordered
       content-class="bg-grey-1"
     >
-      <q-list>
-        <q-item-label header class="text-grey-8"> Quick Links </q-item-label>
-        <QuickLink v-for="link in quickLinks" :key="link.title" v-bind="link" />
+      <q-list v-if="!loggedIn">
+        <q-item-label header class="text-grey-8"> Quick Menu </q-item-label>
+        <QuickMenu v-for="menu in menus" :key="menu.title" v-bind="menu" />
+      </q-list>
+
+      <q-list v-if="loggedIn">
+        <q-item-label header class="text-grey-8"> Quick Menu </q-item-label>
+        <q-item clickable @click="onSignOut">
+          <q-item-section avatar>
+            <q-icon :name="authMenus[0].icon" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>{{ authMenus[0].title }}</q-item-label>
+            <q-item-label caption>
+              {{ authMenus[0].caption }}
+            </q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -34,9 +50,11 @@
 </template>
 
 <script>
-import QuickLink from "components/QuickLink.vue";
+import { mapGetters, mapActions } from "vuex";
 
-const linksData = [
+import QuickMenu from "components/QuickLink.vue";
+
+const menuData = [
   {
     title: "Sign In",
     caption: "Go to the Sign In page",
@@ -51,14 +69,36 @@ const linksData = [
   },
 ];
 
+const authMenuData = [
+  {
+    title: "Sign Out",
+    caption: "Logout from the System",
+    icon: "west",
+    link: "#/",
+  },
+];
+
 export default {
   name: "MainLayout",
-  components: { QuickLink },
-  data() {
-    return {
-      leftDrawerOpen: false,
-      quickLinks: linksData,
-    };
+  components: { QuickMenu },
+  data: () => ({
+    leftDrawerOpen: false,
+    menus: menuData,
+    authMenus: authMenuData,
+  }),
+  computed: {
+    ...mapGetters(["loggedIn"]),
+  },
+  methods: {
+    ...mapActions(["checkLoginStatus", "signUserOut"]),
+    onSignOut() {
+      this.signUserOut();
+
+      this.$router.push({ path: "/" });
+    },
+  },
+  created() {
+    this.checkLoginStatus();
   },
 };
 </script>
