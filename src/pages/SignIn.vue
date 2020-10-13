@@ -30,7 +30,13 @@
         />
 
         <div>
-          <q-btn label="Sign In" type="submit" color="primary" />
+          <q-btn
+            v-if="!loading"
+            label="Sign In"
+            type="submit"
+            color="primary"
+          />
+          <q-spinner v-if="loading" color="primary" size="3em" :thickness="3" />
         </div>
 
         <div>
@@ -47,23 +53,42 @@
 </template>
 
 <script>
+import store from "../store/index";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "SignIn",
-  data() {
-    return {
-      email: null,
-      password: null,
-    };
+  data: () => ({
+    email: null,
+    password: null,
+  }),
+
+  computed: {
+    ...mapGetters(["loading"]),
   },
 
   methods: {
+    ...mapActions(["signIn"]),
     onSubmit() {
-      this.$q.notify({
-        color: "green-4",
-        textColor: "white",
-        icon: "cloud_done",
-        message: "Submitted",
-      });
+      this.signIn({ email: this.email, password: this.password })
+        .then((res) => {
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "check",
+            message: res,
+          });
+
+          this.$router.push({ path: "/home" });
+        })
+        .catch((err) => {
+          this.$q.notify({
+            color: "red-4",
+            textColor: "white",
+            icon: "error",
+            message: err,
+          });
+        });
     },
 
     onNavigateToRegister() {
@@ -72,7 +97,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .link {
