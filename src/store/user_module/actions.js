@@ -28,3 +28,19 @@ export const signIn = ({ commit }, credentials) => {
       });
   });
 };
+
+export const checkLoginStatus = ({ commit }) => {
+  const token = localStorage.getItem("alxToken");
+
+  if (token) {
+    commit("setLoggedIn", true);
+  } else {
+    commit("setLoggedIn", false);
+  }
+};
+
+export const signUserOut = ({ commit }) => {
+  localStorage.removeItem("alxToken");
+
+  commit("setLoggedIn", false);
+};
