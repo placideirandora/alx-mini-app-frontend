@@ -1,9 +1,11 @@
 import { Notify } from "quasar";
 
-export default (to, from, next) => {
-  const token = localStorage.getItem("alxToken");
+import store from "../store/index";
 
-  if (!token) {
+export default (to, from, next) => {
+  store.dispatch("checkLoginStatus");
+
+  if (!store.getters.loggedIn) {
     Notify.create({
       type: "negative",
       message: "You must be signed in to access the page"
