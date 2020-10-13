@@ -5,10 +5,21 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/SignIn.vue") },
-      { path: "/register", component: () => import("pages/SignUp.vue") },
+      {
+        path: "",
+        name: "login",
+        component: () => import("pages/SignIn.vue"),
+        beforeEnter: AuthGuard
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: () => import("pages/SignUp.vue"),
+        beforeEnter: AuthGuard
+      },
       {
         path: "/home",
+        name: "home",
         component: () => import("pages/Home.vue"),
         beforeEnter: AuthGuard
       }
