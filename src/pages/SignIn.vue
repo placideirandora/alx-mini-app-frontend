@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import store from "../store/index";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -70,7 +69,9 @@ export default {
   methods: {
     ...mapActions(["signIn"]),
     onSubmit() {
-      this.signIn({ email: this.email, password: this.password })
+      const payload = { email: this.email, password: this.password };
+
+      this.signIn(payload)
         .then((res) => {
           this.$q.notify({
             type: "positive",
