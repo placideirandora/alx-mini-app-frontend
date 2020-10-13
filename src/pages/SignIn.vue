@@ -77,7 +77,7 @@ export default {
             message: res,
           });
 
-          this.$router.push({ path: "/home" });
+          this.$router.push({ name: "home" });
         })
         .catch((err) => {
           this.$q.notify({
