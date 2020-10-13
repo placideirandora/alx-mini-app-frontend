@@ -1,3 +1,4 @@
+import store from "../index";
 import axios from "boot/axios";
 
 export const signIn = ({ commit }, credentials) => {
@@ -60,10 +61,36 @@ export const signUp = ({ commit }, payload) => {
   });
 };
 
+export const getProfile = ({ commit }) => {
+  return new Promise((resolve, reject) => {
+    const token = localStorage.getItem("alxToken");
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    commit("setLoading", true);
+
+    axios
+      .get("/profile", config)
+      .then(({ data: { data } }) => {
+        commit("setUser", data);
+
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 export const checkLoginStatus = ({ commit }) => {
   const token = localStorage.getItem("alxToken");
 
   if (token) {
+    store.dispatch("getProfile");
+
     commit("setLoggedIn", true);
   } else {
     commit("setLoggedIn", false);
