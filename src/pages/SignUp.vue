@@ -83,7 +83,13 @@
         />
 
         <div>
-          <q-btn label="Sign Up" type="submit" color="primary" />
+          <q-btn
+            v-if="!loading"
+            label="Sign Up"
+            type="submit"
+            color="primary"
+          />
+          <q-spinner v-if="loading" color="primary" size="3em" :thickness="3" />
         </div>
 
         <div>
@@ -100,6 +106,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "SignUp",
   data() {
@@ -113,18 +121,40 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters(["loading"]),
+  },
+
   methods: {
+    ...mapActions(["signUp"]),
     onSubmit() {
-      this.$q.notify({
-        color: "green-4",
-        textColor: "white",
-        icon: "cloud_done",
-        message: "Submitted",
-      });
+      const payload = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        userName: this.userName,
+        email: this.email,
+        password: this.password,
+      };
+
+      this.signUp(payload)
+        .then((res) => {
+          this.$q.notify({
+            type: "positive",
+            message: res,
+          });
+
+          this.$router.push({ name: "login" });
+        })
+        .catch((err) => {
+          this.$q.notify({
+            type: "negative",
+            message: err,
+          });
+        });
     },
 
     onNavigateToLogin() {
-      this.$router.push({ path: "/" });
+      this.$router.push({ name: "login" });
     },
   },
 };
