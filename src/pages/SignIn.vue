@@ -73,9 +73,7 @@ export default {
       this.signIn({ email: this.email, password: this.password })
         .then((res) => {
           this.$q.notify({
-            color: "green-4",
-            textColor: "white",
-            icon: "check",
+            type: "positive",
             message: res,
           });
 
@@ -83,9 +81,7 @@ export default {
         })
         .catch((err) => {
           this.$q.notify({
-            color: "red-4",
-            textColor: "white",
-            icon: "error",
+            type: "negative",
             message: err,
           });
         });
