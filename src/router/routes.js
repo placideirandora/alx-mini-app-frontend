@@ -28,6 +28,12 @@ const routes = [
         name: "change-password",
         component: () => import("pages/ChangePassword.vue"),
         beforeEnter: AuthGuard
+      },
+      {
+        path: "/profile",
+        name: "profile",
+        component: () => import("pages/Profile.vue"),
+        beforeEnter: AuthGuard
       }
     ]
   },
