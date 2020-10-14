@@ -39,7 +39,7 @@
               <q-item-section>Home</q-item-section>
             </q-item>
             <q-separator />
-            <q-item clickable>
+            <q-item clickable to="/profile">
               <q-item-section>Profile</q-item-section>
             </q-item>
             <q-separator />
@@ -79,7 +79,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable>
+        <q-item clickable to="/profile">
           <q-item-section avatar>
             <q-icon name="account_box" />
           </q-item-section>
