@@ -22,6 +22,12 @@ const routes = [
         name: "home",
         component: () => import("pages/Home.vue"),
         beforeEnter: AuthGuard
+      },
+      {
+        path: "/change-password",
+        name: "change-password",
+        component: () => import("pages/ChangePassword.vue"),
+        beforeEnter: AuthGuard
       }
     ]
   },
