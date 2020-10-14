@@ -62,8 +62,9 @@ export const signUp = ({ commit }, payload) => {
 };
 
 export const getProfile = ({ commit }) => {
+  const token = localStorage.getItem("alxToken");
+
   return new Promise((resolve, reject) => {
-    const token = localStorage.getItem("alxToken");
     const config = {
       headers: {
         Authorization: token
@@ -83,6 +84,39 @@ export const getProfile = ({ commit }) => {
   });
 };
 
+export const changePassword = ({ commit }, credentials) => {
+  const token = localStorage.getItem("alxToken");
+
+  return new Promise((resolve, reject) => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    commit("setLoading", true);
+
+    axios
+      .post("/auth/change-password", credentials, config)
+      .then(res => {
+        commit("setLoading", false);
+
+        resolve("Password changed. Sign in again with the new password.");
+      })
+      .catch(
+        ({
+          response: {
+            data: { message }
+          }
+        }) => {
+          commit("setLoading", false);
+
+          reject(message);
+        }
+      );
+  });
+};
+
 export const checkLoginStatus = ({ commit }) => {
   const token = localStorage.getItem("alxToken");
 
@@ -99,4 +133,5 @@ export const signUserOut = ({ commit }) => {
   localStorage.removeItem("alxToken");
 
   commit("setLoggedIn", false);
+  commit("setUser", null);
 };
