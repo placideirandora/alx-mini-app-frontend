@@ -70,8 +70,6 @@ export const getProfile = ({ commit }) => {
       }
     };
 
-    commit("setLoading", true);
-
     axios
       .get("/profile", config)
       .then(({ data: { data } }) => {
