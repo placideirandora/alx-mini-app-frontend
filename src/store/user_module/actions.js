@@ -84,6 +84,40 @@ export const getProfile = ({ commit }) => {
   });
 };
 
+export const updateProfile = ({ commit }, payload) => {
+  const token = localStorage.getItem("alxToken");
+
+  return new Promise((resolve, reject) => {
+    const config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    commit("setLoading", true);
+
+    axios
+      .put("/profile", payload, config)
+      .then(({ data: { message, data } }) => {
+        commit("setUser", data);
+        commit("setLoading", false);
+
+        resolve(message);
+      })
+      .catch(
+        ({
+          response: {
+            data: { message }
+          }
+        }) => {
+          commit("setLoading", false);
+
+          reject(message);
+        }
+      );
+  });
+};
+
 export const changePassword = ({ commit }, credentials) => {
   const token = localStorage.getItem("alxToken");
 
