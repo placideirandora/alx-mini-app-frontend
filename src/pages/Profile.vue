@@ -142,21 +142,21 @@ export default {
         userName: this.userName,
       };
 
-      //   this.changeProfile(payload)
-      //     .then((res) => {
-      //       this.signUserOut();
+      this.updateProfile(payload)
+        .then((res) => {
+          this.$q.notify({
+            type: "positive",
+            message: res,
+          });
 
-      //       this.$q.notify({
-      //         type: "positive",
-      //         message: res,
-      //       });
-      //     })
-      //     .catch((err) => {
-      //       this.$q.notify({
-      //         type: "negative",
-      //         message: err,
-      //       });
-      //     });
+          this.editMode = false;
+        })
+        .catch((err) => {
+          this.$q.notify({
+            type: "negative",
+            message: err,
+          });
+        });
     },
   },
   created() {
