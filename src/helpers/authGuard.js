@@ -18,13 +18,8 @@ export default (to, from, next) => {
     (store.getters.loggedIn && to.name === "login") ||
     (store.getters.loggedIn && to.name === "register")
   ) {
-    Notify.create({
-      type: "warning",
-      message: `You cannot access the ${to.name.toUpperCase()} PAGE while you're signed in. Sign out to do so.`
-    });
-
     next({
-      name: from.name
+      name: "home"
     });
   } else {
     next();
