@@ -35,11 +35,15 @@
             anchor="bottom left"
             self="top left"
           >
+            <q-item clickable to="/home">
+              <q-item-section>Home</q-item-section>
+            </q-item>
+            <q-separator />
             <q-item clickable>
               <q-item-section>Profile</q-item-section>
             </q-item>
             <q-separator />
-            <q-item clickable>
+            <q-item clickable to="/change-password">
               <q-item-section>Change Password</q-item-section>
             </q-item>
             <q-separator />
@@ -64,6 +68,17 @@
 
       <q-list v-if="loggedIn">
         <q-item-label header class="text-grey-8"> Quick Menu </q-item-label>
+        <q-item clickable to="/home">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Home</q-item-label>
+            <q-item-label caption> Go to the Home Page </q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-item clickable>
           <q-item-section avatar>
             <q-icon name="account_box" />
@@ -75,7 +90,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable>
+        <q-item clickable to="/change-password">
           <q-item-section avatar>
             <q-icon name="lock" />
           </q-item-section>
