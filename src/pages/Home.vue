@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <p class="text-h3">Welcome to the Homepage</p>
+    <p class="text-h4 text-center">Welcome to the Homepage</p>
   </q-page>
 </template>
 
