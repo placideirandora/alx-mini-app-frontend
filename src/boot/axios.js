@@ -7,4 +7,4 @@ const axiosInstance = axios.create({
 
 Vue.prototype.$axios = axiosInstance;
 
-export default axiosInstance;
+export { axiosInstance };
