@@ -1,5 +1,5 @@
 import store from "../index";
-import axios from "boot/axios";
+import { axiosInstance as axios } from "boot/axios";
 
 export const signIn = ({ commit }, credentials) => {
   return new Promise((resolve, reject) => {
@@ -97,7 +97,7 @@ export const updateProfile = ({ commit }, payload) => {
     commit("setLoading", true);
 
     axios
-      .put("/profile", payload, config)
+      .patch("/profile", payload, config)
       .then(({ data: { message, data } }) => {
         commit("setUser", data);
         commit("setLoading", false);
@@ -131,7 +131,7 @@ export const changePassword = ({ commit }, credentials) => {
     commit("setLoading", true);
 
     axios
-      .post("/auth/change-password", credentials, config)
+      .patch("/auth/change-password", credentials, config)
       .then(res => {
         commit("setLoading", false);
 
