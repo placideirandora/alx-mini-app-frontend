@@ -67,7 +67,7 @@ export const getProfile = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const config = {
       headers: {
-        Authorization: token
+        Authorization: `Bearer ${token}`
       }
     };
 
@@ -90,7 +90,7 @@ export const updateProfile = ({ commit }, payload) => {
   return new Promise((resolve, reject) => {
     const config = {
       headers: {
-        Authorization: token
+        Authorization: `Bearer ${token}`
       }
     };
 
@@ -124,7 +124,7 @@ export const changePassword = ({ commit }, credentials) => {
   return new Promise((resolve, reject) => {
     const config = {
       headers: {
-        Authorization: token
+        Authorization: `Bearer ${token}`
       }
     };
 
