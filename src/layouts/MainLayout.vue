@@ -14,17 +14,22 @@
         <q-toolbar-title> ALX MINI APP </q-toolbar-title>
 
         <div v-if="loggedIn">
-          <q-chip
-            clickable
-            @click="showDropdownMenu = !showDropdownMenu"
-            :color="$q.screen.xs ? 'transparent' : 'white'"
-            :ripple="$q.screen.xs ? false : true"
-          >
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
-            {{ !this.$q.screen.xs ? user.userName : null }}
-          </q-chip>
+          <div v-if="user">
+            <q-chip
+              clickable
+              @click="showDropdownMenu = !showDropdownMenu"
+              :color="$q.screen.xs ? 'transparent' : 'white'"
+              :ripple="$q.screen.xs ? false : true"
+            >
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+              {{ !this.$q.screen.xs ? user.userName : null }}
+            </q-chip>
+          </div>
+          <div v-if="!user">
+            <q-spinner-dots color="white" size="2em" />
+          </div>
         </div>
 
         <div v-if="loggedIn">
