@@ -1,4 +1,5 @@
 import store from "../index";
+import router from "../../router";
 import { axiosInstance as axios } from "boot/axios";
 
 export const signIn = ({ commit }, credentials) => {
@@ -78,9 +79,20 @@ export const getProfile = ({ commit }) => {
 
         resolve(data);
       })
-      .catch(err => {
-        reject(err);
-      });
+      .catch(
+        ({
+          response: {
+            request: { status }
+          }
+        }) => {
+          if (status === 403) {
+            reject(status);
+
+            store.dispatch("signUserOut");
+            router.push({ name: "login" });
+          }
+        }
+      );
   });
 };
 
