@@ -15,6 +15,7 @@ Vue.use(VueRouter);
  */
 
 export default new VueRouter({
+  mode: "history",
   scrollBehavior: () => ({ x: 0, y: 0 }),
   routes,
 
