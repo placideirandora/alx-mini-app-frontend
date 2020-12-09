@@ -2,6 +2,9 @@ import store from "../index";
 import router from "../../router";
 import { axiosInstance as axios } from "boot/axios";
 
+
+// Double Checking Again 
+
 export const signIn = ({ commit }, credentials) => {
   return new Promise((resolve, reject) => {
     commit("setLoading", true);
