@@ -5,6 +5,8 @@ import { axiosInstance as axios } from "boot/axios";
 
 // Double Checking Again 
 
+// Triple Checking Again!
+
 export const signIn = ({ commit }, credentials) => {
   return new Promise((resolve, reject) => {
     commit("setLoading", true);
