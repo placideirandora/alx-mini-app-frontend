@@ -1,10 +1,10 @@
-# Quasar App (alx-mini-app-frontend)
+# ALX MINI APP (QUASAR)
 
 A Front-End Web Application with Vue/Quasar for ALX Application Technical Challenge
 
 ## Install the dependencies
 ```bash
-yarn
+yarn install
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
